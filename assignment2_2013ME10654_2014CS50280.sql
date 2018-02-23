@@ -8,7 +8,7 @@ SELECT player_name, (DATE_PART('year','2018-12-02'::date) - DATE_PART('year', do
 
 --3--
 
-
+SELECT match_id, toss_winner FROM match WHERE toss_decision = 'bat' ORDER BY match_id ASC;
 
 --4--
 
