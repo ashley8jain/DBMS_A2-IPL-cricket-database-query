@@ -1,28 +1,81 @@
-CREATE TABLE student (
-  student_id varchar(50) PRIMARY KEY,
-  name varchar(50) NOT NULL
-);
-CREATE TABLE teacher (
-  teacher_id varchar(50) PRIMARY KEY,
-  name varchar(50) NOT NULL
-);
-CREATE TABLE course (
-  course_id varchar(50) PRIMARY KEY,
-  name varchar(150) NOT NULL
-);
-CREATE TABLE section (
-  section_number char(1),
-  course_id varchar(50) REFERENCES course ON DELETE CASCADE,
-  CONSTRAINT valid_section CHECK (section_number in ('A','B','C','D')),
-  CONSTRAINT course_section_pk PRIMARY KEY(section_number,course_id)
-);
-CREATE TABLE registers (
-  student_id varchar(50) REFERENCES student ON DELETE CASCADE,
-  course_id varchar(50) REFERENCES course ON DELETE CASCADE,
-  CONSTRAINT registers_pk PRIMARY KEY(student_id,course_id)
-);
-CREATE TABLE teaches (
-  teacher_id varchar(50) REFERENCES teacher ON DELETE CASCADE,
-  course_id varchar(50) REFERENCES course ON DELETE CASCADE,
-  CONSTRAINT teaches_pk PRIMARY KEY(teacher_id,course_id)
-);
+--1--
+
+SELECT player_name FROM player WHERE country_name = 'England' AND batting_hand = 'Left-hand bat' ORDER BY player_name;
+
+--2--
+
+SELECT player_name, (DATE_PART('year','2018-12-02'::date) - DATE_PART('year', dob)) AS player_age FROM player WHERE bowling_skill = 'Legbreak googly' AND (DATE_PART('year','2018-12-02'::date) - DATE_PART('year', dob)) >= 28 ORDER BY player_age DESC;
+
+--3--
+
+
+
+--4--
+
+
+
+--5--
+
+
+
+--6--
+
+
+
+--7--
+
+
+
+--8--
+
+
+
+--9--
+
+
+
+--10--
+
+
+
+--11--
+
+
+
+--12--
+
+
+
+--13--
+
+
+
+--14--
+
+
+
+--15--
+
+
+
+--16--
+
+
+
+--17--
+
+
+
+--18--
+
+
+
+--19--
+
+
+
+--20--
+
+
+
+--21--
