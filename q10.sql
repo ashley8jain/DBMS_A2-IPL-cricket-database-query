@@ -1,0 +1,1 @@
+select player_name,number from (select player_out,count(player_out) as number from wicket_taken where kind_out='run out' group by player_out) as total_out,player where player.player_id=player_out order by number desc,player_name;

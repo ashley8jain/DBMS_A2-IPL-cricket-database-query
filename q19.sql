@@ -1,0 +1,1 @@
+select match_id,venue from match where (team_1 in (select team_id from team where name='Kolkata Knight Riders') or team_2 in (select team_id from team where name='Kolkata Knight Riders')) and match_winner!=(select team_id from team where name='Kolkata Knight Riders') order by match_id;
