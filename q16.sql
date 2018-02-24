@@ -1,0 +1,1 @@
+select player_name,name from player,team,(select player_id,team_id from match,(select player_id,team_id,match_id from player_match where role='CaptainKeeper') as captain_player where match.match_id=captain_player.match_id and match.match_winner = captain_player.team_id) as tmpp where tmpp.player_id=player.player_id and tmpp.team_id=team.team_id order by player_name,name;
