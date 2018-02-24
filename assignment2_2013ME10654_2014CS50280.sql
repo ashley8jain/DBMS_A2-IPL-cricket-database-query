@@ -3,11 +3,9 @@
 select player_name from player where batting_hand='Left-hand bat' and country_name='England' order by player_name asc;
 
 --2--
-age wrong,order by string
-extract year from age
+
 select player_name,player_age from (select player_name,DATE_PART('year', age('2018-12-02',dob)) as player_age from player where bowling_skill='Legbreak googly') as age_table where player_age>=28 order by player_age desc,player_name asc;
 
-SELECT player_name, (DATE_PART('year','2018-12-02'::date) - DATE_PART('year', dob)) AS player_age FROM player WHERE bowling_skill = 'Legbreak googly' AND (DATE_PART('year','2018-12-02'::date) - DATE_PART('year', dob)) >= 28 ORDER BY player_age DESC, player_name ASC;
 --3--
 
 select match_id,toss_winner from match where toss_decision='bat' order by match_id asc;
@@ -25,7 +23,7 @@ select player_name from (select distinct striker from (select match_id,over_id,b
 select match_id,team_1,name as team_2,winning_team_name,win_margin from (select match_id,name as team_1,team_2,winning_team_name,win_margin from (select match_id,team_1,team_2,name as winning_team_name,win_margin from match,team where win_margin>=60 and team.team_id=match.match_winner) as foo,team where team_1=team_id) as bar,team where team_2=team_id order by win_margin asc,match_id asc;
 
 --7--
-age wrong
+
 select player_name from player where batting_hand='Left-hand bat' and DATE_PART('year', age('2018-12-02',dob))<30 order by player_name asc;
 
 --8--
@@ -33,7 +31,6 @@ select player_name from player where batting_hand='Left-hand bat' and DATE_PART(
 select match_id,sum(runs) as total_runs from ((select match_id,runs_scored as runs from batsman_scored) union all (select match_id,extra_runs as runs from extra_runs)) as total_r group by match_id order by match_id asc;
 
 --9--
-order by player_name or innings_no??
 
 with customtt as (select mid,oid,in_no,total_runs,bowler from (select match_id as mid,over_id as oid,innings_no as in_no,sum(runs) as total_runs from ((select match_id,over_id,innings_no,runs_scored as runs from batsman_scored) union all (select match_id,over_id,innings_no,extra_runs as runs from extra_runs)) as total1 group by match_id,over_id,innings_no) as total_r,(select distinct match_id,over_id,innings_no,bowler from ball_by_ball) as bowlertable where mid=match_id and oid=over_id and in_no=innings_no) select mid as match_id,total_runs as maximum_runs,player_name from (select mid,oid,in_no,total_runs,bowler from customtt where (mid,total_runs) in (select mid,max(total_runs) from customtt group by mid)) as ttt,player where player_id=bowler order by mid,oid,player_name asc;
 
@@ -42,7 +39,7 @@ with customtt as (select mid,oid,in_no,total_runs,bowler from (select match_id a
 select player_name,number from (select player_name,coalesce(number,0) as number from (select player_id,player_name,number from (select player_out,count(player_out) as number from wicket_taken where kind_out='run out' group by player_out) as total_out,player where player_id=player_out) as foo natural right outer join player) as bar order by number desc,player_name asc;
 
 --11--
-zeros does not exists???
+
 select kind_out as out_type,count(kind_out) as number from wicket_taken group by kind_out order by number desc,out_type asc;
 
 --12--
