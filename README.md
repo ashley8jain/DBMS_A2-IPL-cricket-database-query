@@ -1,3 +1,3 @@
-# DBMS Assign1
+# DBMS Assign2
 
-[Docs](col362-assignment.pdf)
+[Docs](col-362-assignment.pdf)
